@@ -1,0 +1,39 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Dashboard</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="logout()" type="button">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="dashboard-container">
+      <form class="login100-form"
+        autocomplete="off"
+        [formGroup]="miTODO"
+        (ngSubmit)="onSubmit()">
+  
+      <mat-form-field class="field-task" appearance="fill">
+      <mat-label>Enter a task</mat-label>
+      <input type="text" matInput
+                  placeholder="Ex. study mathematics"
+                  formControlName="description"
+                  maxlength="60"
+                  #input>
+
+      <mat-hint align="end">{{ input.value.length || 0}}/60</mat-hint>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" 
+                      type="submit"
+                      [disabled]="!miTODO.valid"
+                      cursor="pointer">
+          {{ edit ? "Edit" : "Add" }}
+    </button>
+  
+  </form>
+</div>
+
+<app-tasklist (newTaskEvent)="selectedTask($event)"></app-tasklist>
